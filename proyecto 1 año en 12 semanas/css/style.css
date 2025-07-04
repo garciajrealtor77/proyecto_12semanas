@@ -1,0 +1,471 @@
+/* Variables CSS */
+:root {
+    --primary-color: #4CAF50; /* Green */
+    --secondary-color: #607D8B; /* Blue Grey */
+    --accent-color: #FFC107; /* Amber */
+    --danger-color: #F44336; /* Red */
+    --success-color: #8BC34A; /* Light Green */
+    --text-color: #333;
+    --background-color: #f0f2f5;
+    --card-background: #ffffff;
+    --border-color: #ddd;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --border-radius: 8px;
+    --padding-base: 16px;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.app-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--padding-base);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    flex-shrink: 0; /* Prevents header from shrinking */
+}
+
+.app-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 5px;
+}
+
+.app-header h1 {
+    font-size: 1.8em;
+    margin: 0;
+}
+
+.main-nav {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.main-nav button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    flex-grow: 1; /* Allow buttons to grow to fill space */
+    max-width: 180px; /* Limit max width for larger screens */
+}
+
+.main-nav button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.main-nav button.active {
+    background-color: white;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.app-container {
+    flex-grow: 1; /* Allows container to take available space */
+    padding: var(--padding-base);
+    max-width: 900px; /* Max width for larger screens */
+    margin: 20px auto;
+    width: 100%;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.view {
+    background-color: var(--card-background);
+    padding: var(--padding-base);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.view h2 {
+    color: var(--primary-color);
+    margin-bottom: var(--padding-base);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* Forms */
+.form-container {
+    background-color: #f9f9f9;
+    padding: var(--padding-base);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--padding-base);
+}
+
+.form-container h3 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+form .btn {
+    margin-top: 10px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #43A047;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #546E7A;
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #7CB342;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #E53935;
+    transform: translateY(-1px);
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.85em;
+}
+
+.btn-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* Cards & Lists */
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.item-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--padding-base);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.item-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+.item-card p {
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.item-card .dates, .item-card .progress-info {
+    font-size: 0.85em;
+    color: #666;
+}
+
+.item-card .progress-bar-container {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 10px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.item-card .progress-bar {
+    height: 100%;
+    background-color: var(--success-color);
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+}
+
+.item-card .card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Align buttons to the right */
+    margin-top: 10px;
+}
+
+.simple-list {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.simple-list li {
+    background-color: #fefefe;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    word-break: break-word; /* Prevents long words from overflowing */
+}
+
+.simple-list li.completed {
+    background-color: #e6ffe6;
+    text-decoration: line-through;
+    color: #666;
+}
+
+.simple-list li .task-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.no-items-message, .info-message {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* Dashboard Summary Cards */
+.summary-card {
+    background-color: var(--card-background);
+    padding: var(--padding-base);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: var(--padding-base);
+}
+
+.summary-card h3 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 5px;
+}
+
+.summary-card p {
+    margin-bottom: 5px;
+}
+
+/* Modals */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 20px; /* Add padding for small screens */
+}
+
+.modal.visible {
+    display: flex; /* Show the modal */
+}
+
+.modal-content {
+    background-color: var(--card-background);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    max-height: 90vh; /* Limit height for scrollable content */
+    overflow-y: auto; /* Enable scroll for content */
+}
+
+.modal-content h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--padding-base);
+}
+
+.modal-content form {
+    margin-top: 15px;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .app-header h1 {
+        font-size: 1.5em;
+    }
+
+    .main-nav {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        gap: 5px;
+    }
+
+    .main-nav button {
+        width: 100%; /* Full width buttons */
+        max-width: none;
+    }
+
+    .app-container {
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .view, .summary-card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .form-container {
+        padding: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px; /* Add space between stacked buttons */
+    }
+
+    .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .item-card .card-actions {
+        flex-direction: column;
+        align-items: stretch; /* Stretch buttons to full width */
+    }
+
+    .item-card .card-actions .btn {
+        width: 100%;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .app-container {
+        padding: 15px;
+    }
+    .main-nav button {
+        flex-grow: unset; /* Don't force them to grow too much */
+        width: auto;
+    }
+}
+
+/* Specific elements for export/import */
+#import-file-name {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+    text-align: left;
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Año de 12 Semanas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body>
+    <header class="app-header">
+        <img src="assets/logo.png" alt="Logo Mi Año de 12 Semanas" class="app-logo">
+        <h1>Mi Año de 12 Semanas</h1>
+        <nav class="main-nav">
+            <button id="nav-home" class="active">Inicio</button>
+            <button id="nav-cycles">Ciclos</button>
+            <button id="nav-goals">Metas</button>
+            <button id="nav-export-import">Exportar/Importar</button>
+        </nav>
+    </header>
+
+    <main class="app-container">
+        <section id="dashboard-view" class="view active">
+            <h2>Dashboard</h2>
+            <div id="active-cycle-summary" class="summary-card">
+                <h3>Ciclo Activo Actual</h3>
+                <p id="current-cycle-name">No hay ciclo activo.</p>
+                <p id="current-cycle-dates"></p>
+                <p id="current-cycle-progress">Progreso General: 0%</p>
+                <div class="progress-bar-container">
+                    <div id="current-cycle-progress-bar" class="progress-bar" style="width: 0%;"></div>
+                </div>
+                <button id="view-active-cycle-details" class="btn btn-primary" style="display: none;">Ver Detalles</button>
+            </div>
+
+            <div class="summary-card">
+                <h3>Próximas Metas / Tareas</h3>
+                <ul id="upcoming-items-list" class="simple-list">
+                    <li>No hay tareas próximas.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="cycles-view" class="view hidden">
+            <h2>Gestión de Ciclos</h2>
+            <button id="add-cycle-btn" class="btn btn-primary">Nuevo Ciclo</button>
+            <div id="cycle-form-container" class="form-container hidden">
+                <h3><span id="cycle-form-title">Crear Nuevo Ciclo</span></h3>
+                <form id="cycle-form">
+                    <input type="hidden" id="cycle-id">
+                    <label for="cycle-name">Nombre del Ciclo:</label>
+                    <input type="text" id="cycle-name" required>
+                    <label for="cycle-start-date">Fecha de Inicio:</label>
+                    <input type="date" id="cycle-start-date" required>
+                    <button type="submit" class="btn btn-success">Guardar Ciclo</button>
+                    <button type="button" id="cancel-cycle-form-btn" class="btn btn-secondary">Cancelar</button>
+                </form>
+            </div>
+
+            <h3>Ciclos Existentes</h3>
+            <div id="cycles-list" class="card-list">
+                <p class="no-items-message">No hay ciclos creados aún.</p>
+            </div>
+        </section>
+
+        <section id="goals-view" class="view hidden">
+            <h2>Gestión de Metas</h2>
+            <select id="select-cycle-for-goals" class="form-control">
+                <option value="">Selecciona un Ciclo</option>
+            </select>
+            <p id="no-cycle-selected-message" class="info-message">Por favor, selecciona un ciclo para ver y añadir metas.</p>
+
+            <button id="add-goal-btn" class="btn btn-primary hidden">Nueva Meta</button>
+            <div id="goal-form-container" class="form-container hidden">
+                <h3><span id="goal-form-title">Crear Nueva Meta</span></h3>
+                <form id="goal-form">
+                    <input type="hidden" id="goal-id">
+                    <input type="hidden" id="goal-cycle-id">
+                    <label for="goal-name">Nombre de la Meta:</label>
+                    <input type="text" id="goal-name" required>
+                    <label for="goal-description">Descripción:</label>
+                    <textarea id="goal-description"></textarea>
+                    <label for="goal-target">Objetivo/Métrica:</label>
+                    <input type="text" id="goal-target" required>
+                    <button type="submit" class="btn btn-success">Guardar Meta</button>
+                    <button type="button" id="cancel-goal-form-btn" class="btn btn-secondary">Cancelar</button>
+                </form>
+            </div>
+
+            <h3>Metas del Ciclo <span id="current-cycle-goals-name"></span></h3>
+            <div id="goals-list" class="card-list">
+                <p class="no-items-message">No hay metas para este ciclo aún.</p>
+            </div>
+        </section>
+
+        <section id="export-import-view" class="view hidden">
+            <h2>Exportar / Importar Datos</h2>
+            <div class="summary-card">
+                <h3>Exportar Datos</h3>
+                <p>Guarda todos tus ciclos, metas y tareas en un archivo JSON para hacer una copia de seguridad o transferirlos a otro dispositivo.</p>
+                <button id="export-data-btn" class="btn btn-primary">Exportar Datos</button>
+            </div>
+
+            <div class="summary-card">
+                <h3>Importar Datos</h3>
+                <p>Carga un archivo JSON previamente exportado para restaurar tus datos. **¡Advertencia!** Esto sobrescribirá los datos existentes.</p>
+                <input type="file" id="import-file-input" accept=".json" class="hidden">
+                <button id="import-data-btn" class="btn btn-secondary">Seleccionar Archivo JSON</button>
+                <button id="confirm-import-btn" class="btn btn-danger hidden">Confirmar Importación</button>
+                <button id="cancel-import-btn" class="btn btn-secondary hidden">Cancelar</button>
+                <p id="import-file-name" class="info-message"></p>
+            </div>
+        </section>
+
+        <div id="task-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3 id="task-modal-title">Gestión de Tareas</h3>
+                <input type="hidden" id="modal-goal-id">
+                <button id="add-task-btn" class="btn btn-primary">Nueva Tarea</button>
+                <div id="task-form-container" class="form-container hidden">
+                    <h4><span id="task-form-title">Crear Nueva Tarea</span></h4>
+                    <form id="task-form">
+                        <input type="hidden" id="task-id">
+                        <label for="task-name">Descripción de la Tarea:</label>
+                        <input type="text" id="task-name" required>
+                        <label for="task-due-date">Fecha Límite (opcional):</label>
+                        <input type="date" id="task-due-date">
+                        <button type="submit" class="btn btn-success">Guardar Tarea</button>
+                        <button type="button" id="cancel-task-form-btn" class="btn btn-secondary">Cancelar</button>
+                    </form>
+                </div>
+                <h4>Tareas de la Meta</h4>
+                <ul id="tasks-list" class="simple-list">
+                    <p class="no-items-message">No hay tareas para esta meta aún.</p>
+                </ul>
+            </div>
+        </div>
+
+        <div id="confirm-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h3>Confirmar Eliminación</h3>
+                <p id="confirm-modal-message">¿Estás seguro de que quieres eliminar este elemento?</p>
+                <button id="confirm-delete-btn" class="btn btn-danger">Eliminar</button>
+                <button id="cancel-delete-btn" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/db.js" type="module"></script>
+    <script src="js/models.js" type="module"></script>
+    <script src="js/views.js" type="module"></script>
+    <script src="js/controllers.js" type="module"></script>
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>
